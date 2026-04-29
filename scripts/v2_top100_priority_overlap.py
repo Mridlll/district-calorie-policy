@@ -12,15 +12,20 @@ Two SEPARATE overlaps, each in its own folder:
 
 Both run in two calorie variants: with-coconut and ex-coconut.
 
-Output layout:
-  projects/district_calorie_policy/outputs/v2/fert/
-  projects/district_calorie_policy/outputs/v2/dap/
+Inputs (relative to project root):
+  data/Fertiliser use_District level data.xlsx   (FAI 2021-22)
+  data/ToP_100_DAP.xlsx                          (top 100 DAP districts)
+  data/shapefile/in_district.shp                 (India 2020 district shapefile)
+  outputs/prof_df_with_district_calories.xlsx    (built by scripts 01-02)
 
-Mirrored canonical copies (no DefB labels):
-  projects/district_calorie_policy/deliverables_v2/fert/
-  projects/district_calorie_policy/deliverables_v2/dap/
-  E:/CEEW Project/deliverables_final_v2/fert/
-  E:/CEEW Project/deliverables_final_v2/dap/
+Output layout:
+  outputs/v2/fert/      (raw outputs)
+  outputs/v2/dap/
+  deliverables_v2/fert/ (canonical mirror, in repo)
+  deliverables_v2/dap/
+
+If a parent-level folder exists at <repo>/../../deliverables_final_v2/, a
+flat-folder mirror is also written there for the local working tree.
 """
 
 import shutil
@@ -34,16 +39,19 @@ from rapidfuzz import process, fuzz
 import warnings
 warnings.filterwarnings("ignore")
 
-ROOT = Path(r"E:\CEEW Project")
-PROJ = ROOT / "projects" / "district_calorie_policy"
+PROJ = Path(__file__).resolve().parent.parent
 OUT_BASE      = PROJ / "outputs" / "v2"
 DEL_REPO_BASE = PROJ / "deliverables_v2"
-DEL_FLAT_BASE = ROOT / "deliverables_final_v2"
 
-FERT_SRC   = ROOT / "outputs" / "Fertiliser use_District level data.xlsx"
-DAP_SRC    = ROOT / "ToP_100_DAP.xlsx"
+FERT_SRC   = PROJ / "data" / "Fertiliser use_District level data.xlsx"
+DAP_SRC    = PROJ / "data" / "ToP_100_DAP.xlsx"
 MASTER_SRC = PROJ / "outputs" / "prof_df_with_district_calories.xlsx"
-SHP_PATH   = Path(r"C:\Users\Mridul\Downloads\Archives\Compressed\india_shp_2020-master\india_shp_2020-master\district\in_district.shp")
+SHP_PATH   = PROJ / "data" / "shapefile" / "in_district.shp"
+
+# Optional parent-level mirror (for the local working tree only); skip when
+# running from a fresh clone where this folder doesn't exist.
+DEL_FLAT_BASE = PROJ.parent.parent / "deliverables_final_v2"
+WRITE_FLAT_MIRROR = DEL_FLAT_BASE.parent.exists()
 
 OUT_FERT      = OUT_BASE / "fert"
 OUT_DAP       = OUT_BASE / "dap"
@@ -52,9 +60,10 @@ DEL_REPO_DAP  = DEL_REPO_BASE / "dap"
 DEL_FLAT_FERT = DEL_FLAT_BASE / "fert"
 DEL_FLAT_DAP  = DEL_FLAT_BASE / "dap"
 
-for d in (OUT_FERT, OUT_DAP,
-          DEL_REPO_FERT, DEL_REPO_DAP,
-          DEL_FLAT_FERT, DEL_FLAT_DAP):
+dirs_to_make = [OUT_FERT, OUT_DAP, DEL_REPO_FERT, DEL_REPO_DAP]
+if WRITE_FLAT_MIRROR:
+    dirs_to_make += [DEL_FLAT_FERT, DEL_FLAT_DAP]
+for d in dirs_to_make:
     d.mkdir(parents=True, exist_ok=True)
 
 TOP_N = 100
@@ -337,12 +346,15 @@ dap_artifacts  = ["top100_dap_overlap.png",
                   "priority_districts_ex_coconut.csv"]
 for f in fert_artifacts:
     shutil.copy2(OUT_FERT / f, DEL_REPO_FERT / f)
-    shutil.copy2(OUT_FERT / f, DEL_FLAT_FERT / f)
+    if WRITE_FLAT_MIRROR:
+        shutil.copy2(OUT_FERT / f, DEL_FLAT_FERT / f)
 for f in dap_artifacts:
     shutil.copy2(OUT_DAP / f, DEL_REPO_DAP / f)
-    shutil.copy2(OUT_DAP / f, DEL_FLAT_DAP / f)
-print(f"   Fert: copied {len(fert_artifacts)} files into both deliverables folders")
-print(f"   DAP : copied {len(dap_artifacts)} files into both deliverables folders")
+    if WRITE_FLAT_MIRROR:
+        shutil.copy2(OUT_DAP / f, DEL_FLAT_DAP / f)
+where = "both deliverables folders" if WRITE_FLAT_MIRROR else "deliverables_v2/"
+print(f"   Fert: copied {len(fert_artifacts)} files into {where}")
+print(f"   DAP : copied {len(dap_artifacts)} files into {where}")
 
 # ---------- 9. READMEs ----------
 def write_readme(path, kind, n_overlap_food, n_overlap_xc):
@@ -400,10 +412,13 @@ n_dap_food  = len(dap_results["food"])
 n_dap_xc    = len(dap_results["food_ex_coconut"])
 
 write_readme(DEL_REPO_FERT / "README.md", "fert", n_fert_food, n_fert_xc)
-write_readme(DEL_FLAT_FERT / "README.md", "fert", n_fert_food, n_fert_xc)
 write_readme(DEL_REPO_DAP  / "README.md", "dap",  n_dap_food,  n_dap_xc)
-write_readme(DEL_FLAT_DAP  / "README.md", "dap",  n_dap_food,  n_dap_xc)
-print("   Wrote 4 READMEs")
+n_readmes = 2
+if WRITE_FLAT_MIRROR:
+    write_readme(DEL_FLAT_FERT / "README.md", "fert", n_fert_food, n_fert_xc)
+    write_readme(DEL_FLAT_DAP  / "README.md", "dap",  n_dap_food,  n_dap_xc)
+    n_readmes = 4
+print(f"   Wrote {n_readmes} READMEs")
 
 # ---------- 10. Headline summary ----------
 print("\n=== HEADLINE ===")
