@@ -1,0 +1,18 @@
+# Outputs are tracked; large intermediates are not.
+# (We intentionally commit outputs here so the repo is self-contained.)
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+
+# Excel temp
+~$*.xlsx
+
+# Don't commit the raw FAI excel or shapefile — link to source instead
+# (uncomment if needed:)
+# data/raw/

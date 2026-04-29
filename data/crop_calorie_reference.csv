@@ -1,0 +1,55 @@
+crop_sheet,is_food,group,kcal_per_100g,factor,notes
+Rice,True,Cereals,345,1.00,IFCT raw milled rice
+Wheat,True,Cereals,346,1.00,IFCT whole wheat
+Maize,True,Cereals,342,1.00,IFCT
+Barley,True,Cereals,354,1.00,IFCT
+Other Cereals,True,Cereals,342,1.00,proxy = maize
+Bajra,True,Millets,361,1.00,IFCT pearl millet
+Jowar,True,Millets,349,1.00,IFCT sorghum
+Ragi,True,Millets,328,1.00,IFCT finger millet
+Small Millets,True,Millets,363,1.00,IFCT avg coarse cereals
+ArharTur,True,Pulses,335,1.00,IFCT red gram avg pulses
+Gram,True,Pulses,372,1.00,IFCT bengal gram
+MoongGreen Gram,True,Pulses,334,1.00,IFCT green gram
+Urad,True,Pulses,341,1.00,IFCT black gram
+Masoor,True,Pulses,343,1.00,IFCT lentil
+Khesari,True,Pulses,335,1.00,IFCT avg pulses proxy
+Moth,True,Pulses,335,1.00,IFCT avg pulses proxy
+HorseGram,True,Pulses,335,1.00,IFCT avg pulses proxy
+CowpeaLobia,True,Pulses,335,1.00,IFCT avg pulses proxy
+Peas  Beans Pulses,True,Pulses,335,1.00,IFCT avg pulses proxy
+Other Kharif Pulses,True,Pulses,335,1.00,IFCT avg pulses proxy
+Other  Rabi Pulses,True,Pulses,335,1.00,IFCT avg pulses proxy
+Other Summer Pulses,True,Pulses,335,1.00,IFCT avg pulses proxy
+Groundnut,True,Oilseeds,884,0.40,IFCT oils kcal x 40% extraction rate
+Rapeseed Mustard,True,Oilseeds,884,0.33,IFCT oils kcal x 33% extraction
+Soyabean,True,Oilseeds,884,0.18,IFCT oils kcal x 18% extraction
+Sunflower,True,Oilseeds,884,0.30,IFCT oils kcal x 30% extraction
+Sesamum,True,Oilseeds,884,0.42,IFCT oils kcal x 42% extraction
+Safflower,True,Oilseeds,884,0.30,IFCT oils kcal x 30% extraction
+Niger Seed,True,Oilseeds,884,0.30,IFCT oils kcal x 30% extraction
+Linseed,True,Oilseeds,884,0.35,IFCT oils kcal x 35% extraction
+Other Oilseeds,True,Oilseeds,884,0.30,IFCT oils kcal x 30% extraction proxy
+Castor Seed,False,Industrial,0,0.00,non-edible industrial oil
+Sugarcane,True,Sugar,398,0.10,IFCT white sugar x 10% recovery from cane
+Potato,True,Vegetables,97,1.00,IFCT
+Onion,True,Vegetables,50,1.00,IFCT
+Sweet Potato,True,Vegetables,113,1.00,Standard
+Tapioca,True,Vegetables,159,1.00,Cassava raw IFCT
+Banana,True,Fruits,116,1.00,IFCT
+Cashewnut,True,Nuts,553,0.50,raw kernel kcal x 50% kernel-to-harvest ratio
+Coconut,True,Nuts,354,0.50,copra/meat kcal x 50% ratio
+Arecanut,False,NonFood,0,0.00,not consumed for calories
+Dry Chillies,True,Spices,282,1.00,dried IFCT
+Garlic,True,Spices,145,1.00,IFCT
+Ginger,True,Spices,80,1.00,IFCT fresh
+Coriander,True,Spices,298,1.00,seed
+Turmeric,True,Spices,354,1.00,
+Black Pepper,True,Spices,251,1.00,
+Cardamom,True,Spices,311,1.00,
+CottonLint,False,NonFood,0,0.00,fibre crop
+Jute,False,NonFood,0,0.00,fibre crop
+Mesta,False,NonFood,0,0.00,fibre crop
+Sannhamp,False,NonFood,0,0.00,fibre crop
+Tobacco,False,NonFood,0,0.00,non-food
+Guar Seed,False,NonFood,0,0.00,industrial gum
