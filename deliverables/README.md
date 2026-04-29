@@ -21,6 +21,8 @@ recommendation.
 | 09a-d | All-irrigated / all-rainfed / all-high-yield / all-low-yield |
 | **10_fert_overlap.png** | **Fertiliser top-25%-by-kg/ha vs Scale-Up overlap** |
 | **10_fert_overlap_ex_coconut.png** | Same, calorie tag excluding coconut |
+| **11_fert_overlap_pilot.png** | **Fertiliser top-25%-by-kg/ha vs Pilot overlap** |
+| **11_fert_overlap_pilot_ex_coconut.png** | Same, calorie tag excluding coconut |
 
 ## Tables
 
@@ -29,11 +31,14 @@ recommendation.
 | **district_master.xlsx** | 735-row district master: irrigation, yield quartile, calorie tag, **Policy_Action** (with and without coconut), NSA |
 | **prof_df_with_district_calories.xlsx** | Full prof_df enriched with district-level food/no-coconut/total TKcal and z-tags |
 | **fert_scaleup_overlap.xlsx** | Fertiliser top-25% × Scale-Up overlap tables (both calorie variants) + method note |
+| **fert_pilot_overlap.xlsx** | Fertiliser top-25% × Pilot overlap tables (both calorie variants) + method note |
 | district_classification_detail.xlsx | Rainfed/irrigated × high/low yield 2×2 classification per district |
 | binary_summary.xlsx | Crosstabs behind the binary classification |
 | district_calorie_production.csv | 725 districts × food/no-coconut/total TKcal, z-scores, Low/Medium/High tags |
 | scaleup_districts.csv | The Scale-Up basket (food crops with coconut) — 263 districts |
 | scaleup_districts_ex_coconut.csv | Scale-Up basket with calorie tag excluding coconut |
+| pilot_districts.csv | The Pilot basket (food crops with coconut) — 129 districts |
+| pilot_districts_ex_coconut.csv | Pilot basket with calorie tag excluding coconut |
 | state_rollup.csv | State-level counts of Scale-Up / Pilot / Avoid |
 
 ## Shapefile
@@ -68,6 +73,12 @@ Of FAI's top-25%-by-kg/ha fertiliser-intensive districts (80 total, 16 states):
 **6 are Scale Up** — Vaishali, Araria, Supaul (Bihar); Raichur, Yadgir
 (Karnataka); Sonbhadra (UP). These are the genuine policy red flags: heavy
 fertiliser use that isn't translating into calorie security.
+
+**7 are Pilot** — Purnia, Katihar, Khagaria, Bhagalpur (Bihar); Mahbubnagar,
+Nalgonda (Telangana); Kaushambi (UP). High fertiliser intensity sitting in the
+middle band of the Policy_Action matrix — calorie-medium with mid-yield, or
+calorie-low with upper-mid yield — i.e. ambiguous targets where intensification
+hasn't clearly delivered headroom or a calorie surplus yet.
 
 ## Reproducibility
 
